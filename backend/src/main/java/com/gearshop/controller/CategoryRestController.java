@@ -26,7 +26,7 @@ public class CategoryRestController {
 
     @GetMapping(produces = APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<List<Category>> getAll() {
-        System.out.println("test");
+        System.out.println("test2");
         return new ResponseEntity<>(categoryRepository.findAll(), OK);
     }
 }
