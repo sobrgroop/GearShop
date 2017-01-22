@@ -1,6 +1,6 @@
 package com.gearshop.service;
 
-import com.gearshop.entity.Role;
+import com.gearshop.constant.Role;
 import com.gearshop.entity.User;
 import com.gearshop.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +59,6 @@ public class UserServiceImpl implements UserService {
         userRepository.delete(id);
     }
 
-    // TODO: 03.01.2017 encrypt user pass there or before?
     @Override
     public User create(User user) {
         user.setPassword(passwordEncoder.encodePassword(user.getPassword(), user.getEmail()));

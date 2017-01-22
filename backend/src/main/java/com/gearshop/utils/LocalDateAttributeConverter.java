@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 
 @Converter(autoApply = true)
+@SuppressWarnings("unused")
 public class LocalDateAttributeConverter implements AttributeConverter<LocalDate, Date> {
 
     @Override

@@ -1,5 +1,7 @@
 package com.gearshop.entity;
 
+import com.gearshop.constant.Role;
+
 import javax.persistence.*;
 import java.io.Serializable;
 

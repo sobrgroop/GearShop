@@ -14,6 +14,6 @@ public class Application {
 
 	@Bean
 	public ShaPasswordEncoder passwordEncoder() {
-		return new ShaPasswordEncoder(384);
+		return new ShaPasswordEncoder(512);
 	}
 }

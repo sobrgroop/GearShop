@@ -1,4 +1,4 @@
-package com.gearshop.entity;
+package com.gearshop.constant;
 
 public enum Status {
     BUILDING, NEW, PROCESSING, CONFIRMED, CANCELLED

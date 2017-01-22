@@ -25,12 +25,12 @@ public class ProductRestController {
         this.productService = productService;
     }
 
-    @GetMapping(value = "products", produces = APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(value = "/products", produces = APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<List<Product>> getAll() {
         return new ResponseEntity<>(productService.getAll(), OK);
     }
 
-    @GetMapping(value = "products/{id}", produces = APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(value = "/products/{id}", produces = APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<Product> get(@PathVariable("id") Long id) {
         Optional<Product> product = productService.get(id);
         if (product.isPresent()) {
@@ -40,7 +40,7 @@ public class ProductRestController {
         }
     }
 
-    @GetMapping(value = "categories/{id}", produces = APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(value = "/categories/{id}", produces = APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<List<Product>> getByCategory(@PathVariable("id") Long categoryId) {
         return new ResponseEntity<>(productService.getByCategory(categoryId), OK);
     }
