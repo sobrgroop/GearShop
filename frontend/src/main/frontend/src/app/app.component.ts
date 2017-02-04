@@ -1,5 +1,4 @@
-import {Component} from '@angular/core';
-import {CategoryService} from "./category.service";
+import {Component} from "@angular/core";
 
 @Component({
   selector: 'app-root',
@@ -7,22 +6,8 @@ import {CategoryService} from "./category.service";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  public categories;
 
-  constructor(private categoryService: CategoryService) {
+  constructor() {
   }
 
-  ngOnInit() {
-    this.getCategories();
-  }
-
-  getCategories() {
-    this.categoryService.getCategories().subscribe(
-      data => {this.categories = data},
-
-      err => console.error(err),
-
-      () => console.log('categories have been loaded')
-    );
-  }
 }
