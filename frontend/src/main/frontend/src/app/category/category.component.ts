@@ -1,32 +1,28 @@
 import {Component, OnInit} from "@angular/core";
 import {CategoryService} from "../category.service";
 
+const template = require('./category.component.html');
+const styles = require('./category.component.css');
+
 @Component({
   selector: '.dropdown-menu',
-  templateUrl: './category.component.html',
-  styleUrls: ['./category.component.css'],
-  providers: [CategoryService]
+  template: template,
+  styles: [styles]
 })
 export class CategoryComponent implements OnInit {
 
-  public categories;
+  private categories: any;
 
   constructor(private categoryService: CategoryService) {
   }
 
-  ngOnInit() {
-    this.getCategories();
-  }
-
-  getCategories() {
+  ngOnInit(): void {
     this.categoryService.getCategories().subscribe(
       data => {
         this.categories = data
       },
-
-      err => console.error(err),
-
-      () => console.log('categories have been loaded')
+      err => console.error(err)
     );
   }
+
 }

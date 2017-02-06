@@ -1,4 +1,5 @@
 <li *ngFor="let category of categories">
-  <a>{{category.name}}</a>
+  <!--<a [routerLink]="['/category/' + category.id]">{{category.name}}</a>-->
+  <a [routerLink]="['/category', category.id]">{{category.name}}</a>
 </li>
-<li role="separator" class="divider"></li>
+<!--<li role="separator" class="divider"></li>-->
