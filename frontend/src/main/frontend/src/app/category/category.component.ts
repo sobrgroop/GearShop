@@ -1,5 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {CategoryService} from "../category.service";
+import {Category} from "../category";
 
 const template = require('./category.component.html');
 const styles = require('./category.component.css');
@@ -11,7 +12,8 @@ const styles = require('./category.component.css');
 })
 export class CategoryComponent implements OnInit {
 
-  private categories: any;
+  //noinspection JSMismatchedCollectionQueryUpdate
+  private categories: Category[];
 
   constructor(private categoryService: CategoryService) {
   }
