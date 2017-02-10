@@ -12,7 +12,7 @@ export class CategoryService {
     return this.http.get('/categories').map(res => res.json());
   }
 
-  getProducts(id) {
+  getProducts(id: string) {
     return this.http.get('/categories/' + id).map(res => res.json());
   }
 

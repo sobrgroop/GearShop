@@ -47,16 +47,13 @@ public class Order implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
 
-        Order order = (Order) o;
+        Order order = (Order) object;
 
-        if (!id.equals(order.id)) return false;
-        if (!request.equals(order.request)) return false;
-        return date.equals(order.date);
-
+        return id.equals(order.id) && request.equals(order.request) && date.equals(order.date);
     }
 
     @Override

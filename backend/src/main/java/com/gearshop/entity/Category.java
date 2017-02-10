@@ -34,15 +34,13 @@ public class Category implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
 
-        Category category = (Category) o;
+        Category category = (Category) object;
 
-        if (!id.equals(category.id)) return false;
-        return name.equals(category.name);
-
+        return id.equals(category.id) && name.equals(category.name);
     }
 
     @Override

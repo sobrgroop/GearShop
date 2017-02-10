@@ -1,6 +1,7 @@
 import {Component, OnInit, OnDestroy} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import {CategoryService} from "../category.service";
+import {Product} from "../product";
 
 const template = require('./product.component.html');
 const styles = require('./product.component.css');
@@ -12,7 +13,8 @@ const styles = require('./product.component.css');
 })
 export class ProductComponent implements OnInit, OnDestroy {
 
-  private products: any;
+  //noinspection JSMismatchedCollectionQueryUpdate
+  private products: Product[];
   private id: string;
   private sub: any;
 
@@ -37,5 +39,11 @@ export class ProductComponent implements OnInit, OnDestroy {
       },
       err => console.error(err)
     );
+  }
+
+  //noinspection JSUnusedGlobalSymbols,JSMethodCanBeStatic
+  addToCart(product: Product, count: number): void {
+    console.log(product.name);
+    console.log(count);
   }
 }

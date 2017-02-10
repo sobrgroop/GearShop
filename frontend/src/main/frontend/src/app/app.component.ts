@@ -1,5 +1,4 @@
 import {Component} from "@angular/core";
-import {Router} from "@angular/router";
 
 const template = require('./app.component.html');
 const styles = require('./app.component.css');
@@ -10,8 +9,5 @@ const styles = require('./app.component.css');
   styles: [styles]
 })
 export class AppComponent {
-
-  constructor(public router: Router) {
-  }
 
 }

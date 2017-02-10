@@ -1,5 +1,4 @@
-<li *ngFor="let category of categories">
-  <!--<a [routerLink]="['/category/' + category.id]">{{category.name}}</a>-->
-  <a [routerLink]="['/category', category.id]">{{category.name}}</a>
-</li>
-<!--<li role="separator" class="divider"></li>-->
+<template ngFor let-category [ngForOf] = "categories" let-l="last">
+  <li><a [routerLink]="['/category', category.id]">{{category.name}}</a></li>
+  <li *ngIf="!l" role="separator" class="divider"></li>
+</template>
