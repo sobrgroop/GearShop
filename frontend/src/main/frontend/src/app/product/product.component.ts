@@ -13,37 +13,37 @@ const styles = require('./product.component.css');
 })
 export class ProductComponent implements OnInit, OnDestroy {
 
-  //noinspection JSMismatchedCollectionQueryUpdate
-  private products: Product[];
+  private _products: Product[];
   private id: string;
-  private sub: any;
 
-  constructor(private categoryService: CategoryService, private route: ActivatedRoute) {
+  private onRouteEvent: any;
+
+  constructor(private categoryService: CategoryService,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    this.sub = this.route.params.subscribe(params => {
+    this.onRouteEvent = this.route.params.subscribe(params => {
       this.id = params['id'];
       this.loadProducts();
     });
   }
 
   ngOnDestroy(): void {
-    this.sub.unsubscribe();
+    this.onRouteEvent.unsubscribe();
   }
 
   loadProducts(): void {
     this.categoryService.getProducts(this.id).subscribe(
       data => {
-        this.products = data
+        this._products = data
       },
       err => console.error(err)
     );
   }
 
-  //noinspection JSUnusedGlobalSymbols,JSMethodCanBeStatic
-  addToCart(product: Product, count: number): void {
-    console.log(product.name);
-    console.log(count);
+  get products(): Product[] {
+    return this._products;
   }
+
 }

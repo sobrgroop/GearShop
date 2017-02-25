@@ -12,8 +12,7 @@ const styles = require('./category.component.css');
 })
 export class CategoryComponent implements OnInit {
 
-  //noinspection JSMismatchedCollectionQueryUpdate
-  private categories: Category[];
+  private _categories: Category[];
 
   constructor(private categoryService: CategoryService) {
   }
@@ -21,10 +20,13 @@ export class CategoryComponent implements OnInit {
   ngOnInit(): void {
     this.categoryService.getCategories().subscribe(
       data => {
-        this.categories = data
+        this._categories = data
       },
       err => console.error(err)
     );
   }
 
+  get categories(): Category[] {
+    return this._categories;
+  }
 }
