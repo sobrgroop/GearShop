@@ -1,3 +1,4 @@
+/*
 package com.gearshop.entity;
 
 import javax.persistence.*;
@@ -62,5 +63,65 @@ public class Order implements Serializable {
         result = 31 * result + request.hashCode();
         result = 31 * result + date.hashCode();
         return result;
+    }
+}
+*/
+
+package com.gearshop.entity;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.time.LocalDate;
+
+@Entity
+@Table(name = "orders")
+public class Order implements Serializable {
+
+    private static final long serialVersionUID = -4552359336237479989L;
+
+    @Id
+    @Column(name = "order_id")
+    @GeneratedValue
+    private Long id;
+
+    @Column(nullable = false)
+    private LocalDate createDate;
+
+    @Column(nullable = false)
+    private String phoneNumber;
+
+    @Column
+    private User user;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public LocalDate getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(LocalDate createDate) {
+        this.createDate = createDate;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

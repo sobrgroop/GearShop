@@ -10,7 +10,7 @@
   <tbody>
   <tr *ngFor="let product of products">
     <td class="col-md-3">{{ product.name }}</td>
-    <td class="col-md-1">{{ product.price | currency }}</td>
+    <td class="col-md-1">{{ product.price / 100 }}</td>
     <td class="col-md-6">{{ product.description }}</td>
     <td class="col-md-1">
       <button [addToCart]="product" class="btn btn-success">

@@ -4,12 +4,12 @@ import {Request} from "../request";
 import {Product} from "../product";
 
 const template = require('./cart.component.html');
-const styles = require('./cart.component.css');
+const style = require('./cart.component.css');
 
 @Component({
   selector: '.modal-dialog',
   template: template,
-  styles: [styles]
+  styles: [style]
 })
 export class CartComponent implements OnInit, OnDestroy {
 

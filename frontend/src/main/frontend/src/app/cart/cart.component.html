@@ -20,12 +20,12 @@
       <tbody>
       <tr *ngFor="let item of cartItems">
         <td class="col-md-3">{{ item.product.name }}</td>
-        <td class="col-md-1">{{ item.product.price | currency }}</td>
+        <td class="col-md-1">{{ item.product.price / 100 }}</td>
         <td class="col-md-6">{{ item.product.description }}</td>
         <td class="col-md-1">{{ item.count }} pcs.</td>
         <td class="col-md-1">
-          <button [removeFromCart]="item.product" class="btn btn-warning">
-            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Remove One
+          <button [removeFromCart]="item.product" class="btn btn-default">
+            <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Remove One
           </button>
         </td>
       </tr>
@@ -33,7 +33,9 @@
     </table>
   </div>
   <div class="modal-footer">
-    <button [ngClass]="cartItems.length > 0 ? 'btn btn-primary' : 'btn btn-primary disabled'">Checkout</button>
-    <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+    <button [ngClass]="cartItems.length > 0 ? 'btn btn-primary' : 'btn btn-primary disabled'">
+      <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Checkout
+    </button>
+    <button class="btn btn-default" data-dismiss="modal">Close</button>
   </div>
 </div>

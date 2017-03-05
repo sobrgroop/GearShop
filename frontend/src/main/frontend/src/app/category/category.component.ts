@@ -3,12 +3,13 @@ import {CategoryService} from "../category.service";
 import {Category} from "../category";
 
 const template = require('./category.component.html');
-const styles = require('./category.component.css');
+const style = require('./category.component.css');
 
 @Component({
   selector: '.dropdown-menu',
   template: template,
-  styles: [styles]
+  styles: [style],
+  providers: [CategoryService]
 })
 export class CategoryComponent implements OnInit {
 

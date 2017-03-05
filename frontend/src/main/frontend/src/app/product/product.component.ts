@@ -4,12 +4,13 @@ import {CategoryService} from "../category.service";
 import {Product} from "../product";
 
 const template = require('./product.component.html');
-const styles = require('./product.component.css');
+const style = require('./product.component.css');
 
 @Component({
   selector: 'app-root',
   template: template,
-  styles: [styles]
+  styles: [style],
+  providers: [CategoryService]
 })
 export class ProductComponent implements OnInit, OnDestroy {
 
@@ -34,7 +35,7 @@ export class ProductComponent implements OnInit, OnDestroy {
   }
 
   loadProducts(): void {
-    this.categoryService.getProducts(this.id).subscribe(
+    this.categoryService.getProductsByCategory(this.id).subscribe(
       data => {
         this._products = data
       },
