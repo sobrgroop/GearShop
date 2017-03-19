@@ -1,6 +1,8 @@
 package com.gearshop.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
@@ -16,13 +18,16 @@ public class CartItem implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "product_id", nullable = false)
+    @NotNull(message = "error.product.notnull")
     private Product product;
 
     @ManyToOne
     @JoinColumn(name = "order_id", nullable = false)
     private Order order;
 
+    @Min(value = 1, message = "error.count.size")
     @Column(nullable = false)
+    @NotNull
     private int count;
 
     public Long getId() {

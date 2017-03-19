@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "t_products")
+@Table(name = "products")
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 4883769254114338196L;
@@ -26,6 +26,9 @@ public class Product implements Serializable {
 
     @Column(nullable = false)
     private String description;
+
+    @Column(nullable = false)
+    private int availableCount;
 
     public Long getId() {
         return id;
@@ -65,6 +68,14 @@ public class Product implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getAvailableCount() {
+        return availableCount;
+    }
+
+    public void setAvailableCount(int availableCount) {
+        this.availableCount = availableCount;
     }
 
     @Override

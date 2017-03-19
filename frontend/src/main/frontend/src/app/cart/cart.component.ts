@@ -1,35 +1,44 @@
-import {Component, OnInit, OnDestroy} from "@angular/core";
+import {Component, OnInit, OnDestroy, ViewChild} from "@angular/core";
 import {LocalStorageService} from "angular-2-local-storage";
-import {Request} from "../request";
 import {Product} from "../product";
+import {CartItem} from "../cart-item";
+import {CartService} from "../cart.service";
+import {ModalComponent} from "ng2-bs3-modal/components/modal";
 
 const template = require('./cart.component.html');
 const style = require('./cart.component.css');
 
 @Component({
-  selector: '.modal-dialog',
+  selector: '.cartModal',
   template: template,
-  styles: [style]
+  styles: [style],
+  providers: [CartService]
 })
 export class CartComponent implements OnInit, OnDestroy {
 
-  private _cartItems: Request[];
+  @ViewChild('cart')
+  private modal: ModalComponent;
+
+  private cartItems: CartItem[];
 
   private onSetEvent: any;
   private onRemoveEvent: any;
 
-  constructor(private localStorageService: LocalStorageService) {
+  private phone: string;
+
+  constructor(private localStorageService: LocalStorageService, private cartService: CartService) {
   }
 
   ngOnInit(): void {
     this.updateCartItems();
 
-    this.onSetEvent = this.localStorageService.setItems$.subscribe(complete => {
-      this.updateCartItems();
-    });
-    this.onRemoveEvent = this.localStorageService.removeItems$.subscribe(complete => {
-      this.updateCartItems();
-    });
+    this.onSetEvent = this.localStorageService.setItems$.subscribe(() =>
+      this.updateCartItems()
+    );
+
+    this.onRemoveEvent = this.localStorageService.removeItems$.subscribe(() =>
+      this.updateCartItems()
+    );
   }
 
   ngOnDestroy(): void {
@@ -37,24 +46,39 @@ export class CartComponent implements OnInit, OnDestroy {
     this.onRemoveEvent.unsubscribe();
   }
 
-  updateCartItems(): void {
-    this._cartItems = this.getStorageItems();
+  private updateCartItems(): void {
+    this.cartItems = this.getStorageItems();
   }
 
-  getStorageItems(): Request[] {
+  private getStorageItems(): CartItem[] {
     let keys: string[] = this.localStorageService.keys();
-    let items: Request[] = new Array(keys.length);
-    let i: number = 0;
-    for (let key of keys) {
+    let items: CartItem[] = new Array(keys.length);
+
+    keys.forEach((key, i) => {
       let product: Product = JSON.parse(key);
       let count: number = Number(this.localStorageService.get(key));
-      items[i] = new Request(product, count);
-      i++;
-    }
+      items[i] = new CartItem(product, count);
+    });
+
     return items;
   }
 
-  get cartItems(): Request[] {
-    return this._cartItems;
+  close() {
+    this.modal.close();
+  }
+
+  open() {
+    this.phone = '';
+    this.modal.open();
+  }
+
+  onSubmit() {
+    console.log(this.phone);
+    this.cartService.checkout(this.phone, this.cartItems).subscribe(() => {
+        console.log('success');
+        this.localStorageService.clearAll();
+        this.modal.close();
+      }
+    );
   }
 }

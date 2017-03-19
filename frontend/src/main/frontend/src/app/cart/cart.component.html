@@ -1,41 +1,60 @@
-<div class="modal-content">
-  <div class="modal-header">
-    <button class="close" data-dismiss="modal">&times;</button>
+<modal #cart>
+  <modal-header [show-close]="true">
     <h4 class="modal-title">Cart</h4>
-  </div>
-  <div [ngSwitch]="cartItems.length" class="modal-body">
+  </modal-header>
+  <div [ngSwitch]="cartItems.length">
+    <div *ngSwitchCase="0">
+      <modal-body>
+        <p>Your cart is empty</p>
+        <modal-footer>
+          <button type="button" class="btn btn-default" data-dismiss="modal" (click)="cart.dismiss()">Cancel</button>
+        </modal-footer>
+      </modal-body>
+    </div>
 
-    <p *ngSwitchCase="0">Your cart is empty</p>
+    <form *ngSwitchDefault #cartForm="ngForm" (ngSubmit)="onSubmit()">
+      <modal-body>
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th class="col-md-3">Name</th>
+            <th class="col-md-1">Price</th>
+            <th class="col-md-6">Description</th>
+            <th class="col-md-1">Quantity</th>
+            <th class="col-md-1"></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of cartItems">
+            <td class="col-md-3">{{ item.product.name }}</td>
+            <td class="col-md-1">{{ item.product.price / 100 }}</td>
+            <td class="col-md-6">{{ item.product.description }}</td>
+            <td class="col-md-1">{{ item.count }} pcs.</td>
+            <td class="col-md-1">
+              <button [removeFromCart]="item.product" class="btn btn-default">
+                Remove One
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
 
-    <table *ngSwitchDefault class="table table-hover">
-      <thead>
-      <tr>
-        <th class="col-md-3">Name</th>
-        <th class="col-md-1">Price</th>
-        <th class="col-md-6">Description</th>
-        <th class="col-md-1">Quantity</th>
-        <th class="col-md-1"></th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let item of cartItems">
-        <td class="col-md-3">{{ item.product.name }}</td>
-        <td class="col-md-1">{{ item.product.price / 100 }}</td>
-        <td class="col-md-6">{{ item.product.description }}</td>
-        <td class="col-md-1">{{ item.count }} pcs.</td>
-        <td class="col-md-1">
-          <button [removeFromCart]="item.product" class="btn btn-default">
-            <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Remove One
-          </button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+        <div class="form-group">
+          <label for="phone" class="cols-sm-2 control-label">Phone</label>
+          <div class="cols-sm-10">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-phone" aria-hidden="true"></i></span>
+              <input [(ngModel)]="phone" name="phone" type="text" class="form-control" id="phone"
+                     placeholder="Enter your Phone" required/>
+            </div>
+          </div>
+        </div>
+
+      </modal-body>
+      <modal-footer>
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="cart.dismiss()">Close</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!cartForm.valid">Checkout</button>
+      </modal-footer>
+    </form>
   </div>
-  <div class="modal-footer">
-    <button [ngClass]="cartItems.length > 0 ? 'btn btn-primary' : 'btn btn-primary disabled'">
-      <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Checkout
-    </button>
-    <button class="btn btn-default" data-dismiss="modal">Close</button>
-  </div>
-</div>
+</modal>

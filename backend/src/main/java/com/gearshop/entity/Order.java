@@ -1,75 +1,9 @@
-/*
 package com.gearshop.entity;
 
-import javax.persistence.*;
-import java.io.Serializable;
-import java.time.LocalDate;
-
-@Entity
-@Table(name = "t_orders")
-public class Order implements Serializable {
-
-    private static final long serialVersionUID = -4552359336237479989L;
-
-    @Id
-    @Column(name = "order_id")
-    @GeneratedValue
-    private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "request_id", nullable = false)
-    private Request request;
-
-    @Column(nullable = false)
-    private LocalDate date;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Request getRequest() {
-        return request;
-    }
-
-    public void setRequest(Request request) {
-        this.request = request;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-
-        Order order = (Order) object;
-
-        return id.equals(order.id) && request.equals(order.request) && date.equals(order.date);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + request.hashCode();
-        result = 31 * result + date.hashCode();
-        return result;
-    }
-}
-*/
-
-package com.gearshop.entity;
+import com.gearshop.constant.Status;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -78,6 +12,15 @@ import java.time.LocalDate;
 public class Order implements Serializable {
 
     private static final long serialVersionUID = -4552359336237479989L;
+
+    public Order(LocalDate createDate) {
+        this.createDate = createDate;
+    }
+
+    public Order(LocalDate createDate, String phone) {
+        this.createDate = createDate;
+        this.phone = phone;
+    }
 
     @Id
     @Column(name = "order_id")
@@ -88,10 +31,15 @@ public class Order implements Serializable {
     private LocalDate createDate;
 
     @Column(nullable = false)
-    private String phoneNumber;
+    private String phone;
 
     @Column
     private User user;
+
+    @NotNull
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Status status = Status.BUILDING;
 
     public Long getId() {
         return id;
@@ -109,12 +57,12 @@ public class Order implements Serializable {
         this.createDate = createDate;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public User getUser() {
@@ -123,5 +71,13 @@ public class Order implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }

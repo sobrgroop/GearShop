@@ -5,3 +5,7 @@ body {
 .dropdown-menu {
   cursor: pointer;
 }
+
+.navbar-collapse a {
+  cursor: pointer;
+}

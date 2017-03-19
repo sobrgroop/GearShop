@@ -1,12 +1,15 @@
 package com.gearshop.entity;
 
 import com.gearshop.constant.Role;
+import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "t_users")
+@Table(name = "site_users")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 8745437978052690213L;
@@ -27,9 +30,13 @@ public class User implements Serializable {
     @GeneratedValue
     private Long id;
 
+    @Email
+    @NotNull
     @Column(unique = true, nullable = false)
     private String email;
 
+    @NotNull
+    @Size(min = 4, max = 512)
     @Column(nullable = false)
     private String password;
 
